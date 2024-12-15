@@ -19,10 +19,15 @@ services:
       - redis
 
   celery:
-    container_name: celery
+    container_name: celery1
     build:
       context: ./dcelery
-    command: celery -A dcelery worker -l INFO
+#    command: celery -A dcelery worker -l INFO
+    # QUEUE
+#    command: celery -A dcelery worker -l INFO -Q queue1
+    # priority
+#    command: celery -A dcelery worker -l INFO -Q celery,celery:1,celery:2,celery:3
+    command: celery -A dcelery worker -l INFO -Q tasks
     volumes:
       - ./dcelery:/usr/src/app/
     environment:
@@ -31,3 +36,17 @@ services:
       - ALLOWED_HOSTS=localhost,127.0.0.1
     depends_on:
       - redis
+      - django
+
+#  celery2:
+#    container_name: celery2
+#    build:
+#      context: ./celeryworker
+#      dockerfile: Dockerfile
+##    command: celery -A celerytask worker --level=INFO
+#    command: celery -A celerytask worker -l INFO -Q queue2
+#    volumes:
+#      - ./celeryworker:/usr/src/app/
+#    depends_on:
+#      - redis
+#      - django

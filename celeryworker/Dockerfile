@@ -11,8 +11,7 @@ RUN pip install --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/
 COPY ./requirements.txt /usr/src/app/requirements.txt
 
 RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
-RUN rm -rf /root/.cache/pip
 
-COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+COPY . /usr/src/app/
 
-# ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+

@@ -1,2 +1,2 @@
-from dcelery.celery import app as celery_app
+from dcelery.celery_config import app as celery_app
 __all__ = ('celery_app',)
